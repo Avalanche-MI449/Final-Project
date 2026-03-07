@@ -10,8 +10,8 @@ function App() {
   return (
     <>
 
-      {/* <SetlistComponent artistName="Franz Ferdinand" /> */}
-      <SetlistComponent artistName="The Beatles" />
+      <SetlistComponent artistName="Franz Ferdinand" />
+      {/* <SetlistComponent artistName="The Beatles" /> */}
     </>
   )
 }
