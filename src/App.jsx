@@ -4,13 +4,28 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import SetlistComponent from './setlistAPI'
 
+// Franz Ferdinand
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [artist, setArtist] = useState("")
+  const [inputArtist, setInputArtist] = useState("")
+
+  // Handler for the input box
+  const getUserInputtedArtist = (event) => {
+    setInputArtist(event.target.value)
+  }
+
+  // Handler for the button click
+  const clickButton = () => {
+    setArtist(inputArtist)
+  }
 
   return (
     <>
+      <input id="artist_input" name="artist_input" type="text" onChange={ getUserInputtedArtist }/>
+      <button onClick={ clickButton }>Click Me</button>
 
-      <SetlistComponent artistName="Franz Ferdinand" />
+      <SetlistComponent artistName={artist} />
       {/* <SetlistComponent artistName="The Beatles" /> */}
     </>
   )

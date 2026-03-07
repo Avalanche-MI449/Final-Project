@@ -12,6 +12,11 @@ const SetlistComponent = ({ artistName }) => {
         // Create a function to fetch the data from the API
         const fetchArtistData = async () => {
             try{
+                // Check to make sure we have an artist name before we try to fetch data
+                if (!artistName) {
+                    return;
+                }
+
                 const setlistURL = `/setlistapi/1.0/search/artists?artistName=${artistName}&p=1&sort=sortName`;
 
                 // Connect to the API 
@@ -31,12 +36,16 @@ const SetlistComponent = ({ artistName }) => {
             };
         };
         fetchArtistData();
-    }, []);
+    }, [artistName]);
 
-    console.log(artists);
+    // Only render the setlist data if we have an artist name, otherwise prompt the user to enter one
+    if (!artistName) {
+        return <p>Please enter an artist name to see the setlist data.</p>;
+    }
 
     return (
         <div>
+            <h2>Artist Name: {artistName}</h2>
             <p>Setlist data will be displayed here.</p>
             <ul>
                 {artists.map(artist => (
@@ -45,6 +54,8 @@ const SetlistComponent = ({ artistName }) => {
             </ul>
         </div>
     );
+
+
 
 
 };
