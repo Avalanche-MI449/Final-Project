@@ -1,10 +1,11 @@
 import { useState, useEffect, useCallback } from 'react';
 import EventsWidget from './EventsWidget.jsx';
+import './App.css';
 
 function Events({ artistName }) {
   const [events, setEvents] = useState([]);
   const [page, setPage] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [totalPages, setTotalPages] = useState(0);
 
@@ -56,6 +57,14 @@ function Events({ artistName }) {
   }, [apiKey]);
 
   useEffect(() => {
+    if (!artistName || !artistName.trim()) {
+      setEvents([]);
+      setError(null);
+      setLoading(false);
+      setTotalPages(0);
+      return;
+    }
+
     fetchEvents(page, artistName);
   }, [page, artistName, fetchEvents]);
 
@@ -74,6 +83,10 @@ function Events({ artistName }) {
       setPage(page + 1);
     }
   };
+
+  if (!artistName || !artistName.trim()) {
+    return <h2>Please enter an artist name to see events.</h2>;
+  }
 
   return (
     <div>

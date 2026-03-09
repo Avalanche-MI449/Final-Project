@@ -37,9 +37,16 @@
 
 .results-column {
   padding: 1rem;
-  border: 1px solid #2f2f2f;
+  border: 1px solid #ffffff;
   border-radius: 10px;
   min-height: 320px;
+  background: #141b48;
+}
+
+.results-column ul {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
 }
 
 @media (max-width: 900px) {
@@ -82,4 +89,44 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Events list font */
+#events,
+#events .list-group-item,
+#events .list-group-item-heading,
+#events .list-group-item-text,
+#events .venue {
+  font-family: 'Hepta Slab Variable', 'Hepta Slab', serif;
+}
+#events-panel .panel-title {
+  font-size: 1.6em;
+  line-height: 1.1;
+  font-family: 'Harlow Solid Italic', 'Harlow Solid', 'Brush Script MT', cursive;
+  color: white;
+
+}
+
+.search-controls {
+  background: #ffffff;
+  padding: 0.9rem;
+  border-radius: 10px;
+}
+
+#artist_input {
+  background: #141b48;
+  color: #ffffff;
+  border: 1px solid #9aa7ff;
+  border-radius: 8px;
+  padding: 0.55rem 0.75rem;
+}
+
+#artist_input::placeholder {
+  color: #6f7ac9;
+}
+
+.search-controls button {
+  background: #141b48;
+  color: #ffffff;
+  border: 1px solid #ffffff;
 }

@@ -24,6 +24,7 @@ function App() {
     <div className="app-shell">
       <Navbar />
       <h1>Artist Search</h1>
+      <h3>Enter an artist's name to see their events and setlists.</h3>
       <div className="search-controls">
         <input id="artist_input" name="artist_input" type="text" onChange={ getUserInputtedArtist }/>
         <button onClick={ clickButton }>Click Me</button>
