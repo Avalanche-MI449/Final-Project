@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import SetlistApiComponent from './setlistAPI'
 import Events from './Events.jsx'
+import Navbar from './Navbar.jsx'
 
 // Franz Ferdinand
 
@@ -21,7 +22,7 @@ function App() {
 
   return (
     <div className="app-shell">
-      <header className="top-bar">TourFinder</header>
+      <Navbar />
       <h1>Artist Search</h1>
       <div className="search-controls">
         <input id="artist_input" name="artist_input" type="text" onChange={ getUserInputtedArtist }/>

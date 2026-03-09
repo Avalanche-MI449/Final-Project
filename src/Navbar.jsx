@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <a href="/" className="navbar-logo" aria-label="Home">
-        <img src={TFlogo} alt="TF Logo" />
+        <img src={LogoWhite} alt="TF Logo" />
       </a>
     </nav>
   );
