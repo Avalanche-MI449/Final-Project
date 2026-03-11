@@ -1,48 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function MusicPreviewWidget() {
-  const [query, setQuery] = useState("");
+export default function MusicPreviewWidget({ artistName }) {
   const [track, setTrack] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const searchSong = async () => {
-    if (!query) return;
+  useEffect(() => {
+    if (!artistName) return;
 
-    setLoading(true);
+    const searchSong = async () => {
+      setLoading(true);
+      setTrack(null);
 
-    try {
-      const response = await fetch(
-        `https://itunes.apple.com/search?term=${encodeURIComponent(query)}&entity=song&limit=1`
-      );
+      try {
+        const response = await fetch(
+          `https://itunes.apple.com/search?term=${encodeURIComponent(artistName)}&entity=song&limit=1`
+        );
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (data.results.length > 0) {
-        setTrack(data.results[0]);
-      } else {
-        setTrack(null);
+        if (data.results.length > 0) {
+          setTrack(data.results[0]);
+        } else {
+          setTrack(null);
+        }
+      } catch (error) {
+        console.error("Error fetching song:", error);
       }
-    } catch (error) {
-      console.error("Error fetching song:", error);
-    }
 
-    setLoading(false);
-  };
+      setLoading(false);
+    };
+
+    searchSong();
+  }, [artistName]);
 
   return (
     <div className="music-widget">
-      <h3>Music Preview</h3>
-
-      <div>
-        <input
-          type="text"
-          placeholder="Search for a song..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-
-        <button onClick={searchSong}>Search</button>
-      </div>
+      <h2>Music Preview</h2>
 
       {loading && <p>Loading...</p>}
 

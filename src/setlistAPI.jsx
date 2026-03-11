@@ -17,7 +17,7 @@ const formatEventDate = (eventDate) => {
     return `${month}-${day}-${year}`;
 };
 
-const SetlistApiComponent = ({ artistName }) => {
+const SetlistApiComponent = ({ artistName, onArtistSelect }) => {
     // This will hold the values for setlisst, which we will get from the API 
     const [artists, setArtists] = useState([]);
     const [artistMBID, setArtistMBID] = useState("");
@@ -156,8 +156,10 @@ const SetlistApiComponent = ({ artistName }) => {
     if (!artistMBID) {
         return (
             <div>
-                <h2>Possible Artists</h2>
-                <ul>
+                <div className="panel-heading">
+                    <h2 className="panel-title">Possible Setlists</h2>
+                </div>
+                <ul style={{ maxHeight: '550px', overflowY: 'auto', marginTop: '0em' }}>
                     {artists.map(artist => (
                         <li key={artist.mbid || artist.name}>
                             <button
@@ -169,6 +171,7 @@ const SetlistApiComponent = ({ artistName }) => {
                                     setSelectedArtistLabel(artist.name || "");
                                     setSetlistDate("");
                                     setSongs([]);
+                                    if (onArtistSelect) onArtistSelect(artist.name || "");
                                 }}
                                 disabled={!artist.mbid}
                             >

@@ -7,17 +7,16 @@ function EventsWidget({ events, onPrev, onNext, loading, error }) {
         <h3 className="panel-title">Events</h3>
       </div>
       <div className="panel-body">
-        {loading && <p>Loading events...</p>}
         {error && <p>Error: {error}</p>}
         <div id="events" className="list-group">
           {events.map((event, index) => (
-            <a key={index} href="#" className="list-group-item" onClick={(e) => { e.preventDefault(); /* handle click */ }}>
+            <div key={index} className="list-group-item">
               <h4 className="list-group-item-heading">{event.name}</h4>
               <p className="list-group-item-text">{event.dates?.start?.localDate || 'Date not available'}</p>
               <p className="venue">
                 {event._embedded?.venues?.[0] ? `${event._embedded.venues[0].name} in ${event._embedded.venues[0].city?.name || ''}` : 'Venue not available'}
               </p>
-            </a>
+            </div>
           ))}
         </div>
       </div>

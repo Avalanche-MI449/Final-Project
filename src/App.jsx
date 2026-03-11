@@ -10,6 +10,7 @@ import Navbar from './Navbar.jsx'
 function App() {
   const [artist, setArtist] = useState("")
   const [inputArtist, setInputArtist] = useState("")
+  const [selectedArtist, setSelectedArtist] = useState("")
 
   // Handler for the input box
   const getUserInputtedArtist = (event) => {
@@ -19,24 +20,28 @@ function App() {
   // Handler for the button click
   const clickButton = () => {
     setArtist(inputArtist)
+    setSelectedArtist("")
   }
 
   return (
     <div className="app-shell">
       <Navbar />
       <h1>Artist Search</h1>
-      <h3>Enter an artist's name to see their events and setlists.</h3>
+      <h3>Enter an artist's name to see their events and setlists and listen to a preview of their music.</h3>
       <div className="search-controls">
         <input id="artist_input" name="artist_input" type="text" onChange={ getUserInputtedArtist }/>
-        <button onClick={ clickButton }>Click Me</button>
+        <button onClick={ clickButton }>Search</button>
       </div>
 
       <div className="results-grid">
         <section className="results-column">
-          <SetlistApiComponent artistName={artist} />
+          <SetlistApiComponent artistName={artist} onArtistSelect={setSelectedArtist} />
         </section>
         <section className="results-column">
           <Events artistName={artist} />
+        </section>
+        <section className="results-column">
+          <MusicPreviewWidget artistName={selectedArtist || artist} />
         </section>
       </div>
     </div>
