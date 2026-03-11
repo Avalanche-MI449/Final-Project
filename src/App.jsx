@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import SetlistApiComponent from './setlistAPI'
 import MusicPreviewWidget from "./MusicPreviewWidget";
 import Events from './Events.jsx'
+import Navbar from './Navbar.jsx'
 
 // Franz Ferdinand
 
@@ -23,19 +22,24 @@ function App() {
   }
 
   return (
-    <>
-      <p>franz ferdinand</p>
-      <p>aa7a2827-f74b-473c-bd79-03d065835cf7</p>
-      <input id="artist_input" name="artist_input" type="text" onChange={ getUserInputtedArtist }/>
-      <button onClick={ clickButton }>Click Me</button>
+    <div className="app-shell">
+      <Navbar />
+      <h1>Artist Search</h1>
+      <h3>Enter an artist's name to see their events and setlists.</h3>
+      <div className="search-controls">
+        <input id="artist_input" name="artist_input" type="text" onChange={ getUserInputtedArtist }/>
+        <button onClick={ clickButton }>Click Me</button>
+      </div>
 
-      <SetlistApiComponent artistName={artist} />
-      {/* <SetlistComponent artistName="The Beatles" /> */}
-
-      <Events />
-      <MusicPreviewWidget />
-
-    </>
+      <div className="results-grid">
+        <section className="results-column">
+          <SetlistApiComponent artistName={artist} />
+        </section>
+        <section className="results-column">
+          <Events artistName={artist} />
+        </section>
+      </div>
+    </div>
   )
 }
 

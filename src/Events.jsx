@@ -1,13 +1,13 @@
 import { useState, useEffect, useCallback } from 'react';
 import EventsWidget from './EventsWidget.jsx';
+import './App.css';
 
-function Events() {
+function Events({ artistName }) {
   const [events, setEvents] = useState([]);
   const [page, setPage] = useState(0);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [totalPages, setTotalPages] = useState(0);
-  const [searchQuery, setSearchQuery] = useState('');
 
   const apiKey = import.meta.env.VITE_TICKETMASTER_API_KEY;
 
@@ -57,8 +57,20 @@ function Events() {
   }, [apiKey]);
 
   useEffect(() => {
-    fetchEvents(page, searchQuery);
-  }, [page, searchQuery, fetchEvents]);
+    if (!artistName || !artistName.trim()) {
+      setEvents([]);
+      setError(null);
+      setLoading(false);
+      setTotalPages(0);
+      return;
+    }
+
+    fetchEvents(page, artistName);
+  }, [page, artistName, fetchEvents]);
+
+  useEffect(() => {
+    setPage(0);
+  }, [artistName]);
 
   const handlePrev = () => {
     if (page > 0) {
@@ -72,24 +84,12 @@ function Events() {
     }
   };
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    setPage(0); // Reset to first page on new search
-    // searchQuery state will trigger useEffect
-  };
+  if (!artistName || !artistName.trim()) {
+    return <h2>Please enter an artist name to see events.</h2>;
+  }
 
   return (
     <div>
-      <form onSubmit={handleSearch} style={{ marginBottom: '20px' }}>
-        <input
-          type="text"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Search by artist name..."
-          style={{ marginRight: '10px' }}
-        />
-        <button type="submit">Search</button>
-      </form>
       <EventsWidget
         events={events}
         onPrev={handlePrev}
