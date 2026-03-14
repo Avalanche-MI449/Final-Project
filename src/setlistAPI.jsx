@@ -17,6 +17,8 @@ const formatEventDate = (eventDate) => {
     return `${month}-${day}-${year}`;
 };
 
+const scrollableListStyleClass = "scrollable-list";
+
 const SetlistApiComponent = ({ artistName, onArtistSelect }) => {
     // This will hold the values for setlisst, which we will get from the API 
     const [artists, setArtists] = useState([]);
@@ -159,7 +161,7 @@ const SetlistApiComponent = ({ artistName, onArtistSelect }) => {
                 <div className="panel-heading">
                     <h2 className="panel-title">Possible Setlists</h2>
                 </div>
-                <ul style={{ maxHeight: '550px', overflowY: 'auto', marginTop: '0em' }}>
+                <ul className={scrollableListStyleClass}>
                     {artists.map(artist => (
                         <li key={artist.mbid || artist.name}>
                             <button
@@ -202,7 +204,7 @@ const SetlistApiComponent = ({ artistName, onArtistSelect }) => {
                 </button>
 
                 {setlists.length > 0 ? (
-                    <ul>
+                    <ul className={scrollableListStyleClass}>
                         {setlists.map(setlist => (
                             <li key={setlist.id}>
                                 <button onClick={ () => setSetlistDate(setlist.eventDate) }><p>{formatEventDate(setlist.eventDate)}</p></button>
@@ -241,7 +243,7 @@ const SetlistApiComponent = ({ artistName, onArtistSelect }) => {
                 </button>
 
                 {songs.length > 0 ? (
-                    <ul>
+                    <ul className={scrollableListStyleClass}>
                         {songs.map((song, index) => (
                             <li key={index}>{song}</li>
                         ))}

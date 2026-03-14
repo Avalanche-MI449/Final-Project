@@ -58,6 +58,12 @@
   margin-left: 0;
 }
 
+.scrollable-list {
+  max-height: 550px;
+  overflow-y: auto;
+  margin-top: 0;
+}
+
 
 
 @media (max-width: 900px) {
