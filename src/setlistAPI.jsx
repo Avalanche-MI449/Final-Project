@@ -40,7 +40,7 @@ const SetlistApiComponent = ({ artistName, onArtistSelect }) => {
                     return;
                 }
 
-                const setlistURL = `/setlistapi/1.0/search/artists?artistName=${artistName}&p=1&sort=sortName`;
+                const setlistURL = `/setlistapi/1.0/search/artists?artistName=${encodeURIComponent(artistName)}&p=1&sort=sortName`;
 
                 // Connect to the API 
                 const response = await axios.get(
@@ -78,7 +78,7 @@ const SetlistApiComponent = ({ artistName, onArtistSelect }) => {
                     return;
                 }
 
-                const setlistURL = `/setlistapi/1.0/artist/${artistMBID}/setlists?p=1`;
+                const setlistURL = `/setlistapi/1.0/artist/${encodeURIComponent(artistMBID)}/setlists?p=1`;
 
                 const response = await axios.get(
                     setlistURL,
@@ -110,7 +110,7 @@ const SetlistApiComponent = ({ artistName, onArtistSelect }) => {
                     return;
                 }
 
-                const songURL = `/setlistapi/1.0/search/setlists?artistMbid=${artistMBID}&date=${encodeURIComponent(setlistDate)}&p=1`;
+                const songURL = `/setlistapi/1.0/search/setlists?artistMbid=${encodeURIComponent(artistMBID)}&date=${encodeURIComponent(setlistDate)}&p=1`;
                 
                 const response = await axios.get(
                     songURL,
