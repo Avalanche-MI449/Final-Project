@@ -14,3 +14,5 @@ export default defineConfig({
     }
   }
 })
+
+// Running into a CORS policy issue 

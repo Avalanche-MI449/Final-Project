@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 
 // const setlistURL = '/api/1.0/artist/b10bbbfc-cf9e-42e0-be17-e2c3e1d2600d';
-const setlistApiKey = '1c1QlARHxXsUKzGmRT1Tnp3YoDZwTt4R22To';
+const setlistApiKey = import.meta.env.VITE_SETLIST_API_KEY;
 
 const formatEventDate = (eventDate) => {
     if (!eventDate) {
