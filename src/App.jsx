@@ -4,6 +4,7 @@ import SetlistApiComponent from './setlistAPI'
 import MusicPreviewWidget from "./MusicPreviewWidget";
 import Events from './Events.jsx'
 import Navbar from './Navbar.jsx'
+import Login from './Users.jsx';
 
 // Franz Ferdinand
 
@@ -11,6 +12,8 @@ function App() {
   const [artist, setArtist] = useState("")
   const [inputArtist, setInputArtist] = useState("")
   const [selectedArtist, setSelectedArtist] = useState("")
+  const [user, setUser] = useState('')
+  const [inputUser, setInputUser] = useState('')
 
   // Handler for the input box
   const getUserInputtedArtist = (event) => {
@@ -23,6 +26,17 @@ function App() {
     setSelectedArtist("")
   }
 
+  // Handler for the user input box
+  const getUserName = (event) => {
+    setInputUser(event.target.value)
+  }
+
+  // Handler for the login button click
+  const clickLogin = () => {
+    setUser(inputUser)
+    console.log("User logged in:", inputUser)
+  }
+
   return (
     <div className="app-shell">
       <Navbar />
@@ -32,6 +46,13 @@ function App() {
         <input id="artist_input" name="artist_input" type="text" onChange={ getUserInputtedArtist }/>
         <button onClick={ clickButton }>Search</button>
       </div>
+
+      <div>
+        <input id="user" name="user" type="text" onChange={ getUserName }/>
+        <button onClick={ clickLogin }>Login</button>
+      </div>
+
+      <Login inputUser={ user }/>
 
       <div className="results-grid">
         <section className="results-column">
