@@ -1,62 +1,75 @@
-import { useState } from 'react'
-import './App.css'
-import SetlistApiComponent from './setlistAPI'
+import { useState } from "react";
+import "./App.css";
+import SetlistApiComponent from "./setlistAPI";
 import MusicPreviewWidget from "./MusicPreviewWidget";
-import Events from './Events.jsx'
-import Navbar from './Navbar.jsx'
-import Login from './Users.jsx';
+import Events from "./Events.jsx";
+import Navbar from "./Navbar.jsx";
+import Login from "./Users.jsx";
+import SongSearch from './SongSearch.jsx';
 
 // Franz Ferdinand
 
 function App() {
-  const [artist, setArtist] = useState("")
-  const [inputArtist, setInputArtist] = useState("")
-  const [selectedArtist, setSelectedArtist] = useState("")
-  const [user, setUser] = useState('')
-  const [inputUser, setInputUser] = useState('')
+  const [artist, setArtist] = useState("");
+  const [inputArtist, setInputArtist] = useState("");
+  const [selectedArtist, setSelectedArtist] = useState("");
+  const [user, setUser] = useState("");
+  const [inputUser, setInputUser] = useState("");
+  const [userID, setUserID] = useState(null);
 
   // Handler for the input box
   const getUserInputtedArtist = (event) => {
-    setInputArtist(event.target.value)
-  }
+    setInputArtist(event.target.value);
+  };
 
   // Handler for the button click
   const clickButton = () => {
-    setArtist(inputArtist)
-    setSelectedArtist("")
-  }
+    setArtist(inputArtist);
+    setSelectedArtist("");
+  };
 
   // Handler for the user input box
   const getUserName = (event) => {
-    setInputUser(event.target.value)
-  }
+    setInputUser(event.target.value);
+  };
 
   // Handler for the login button click
   const clickLogin = () => {
-    setUser(inputUser)
-    console.log("User logged in:", inputUser)
-  }
+    setUser(inputUser);
+    console.log("User logged in:", inputUser);
+  };
 
   return (
     <div className="app-shell">
       <Navbar />
       <h1>Artist Search</h1>
-      <h3>Enter an artist's name to see their events and setlists and listen to a preview of their music.</h3>
+      <h3>
+        Enter an artist's name to see their events and setlists and listen to a
+        preview of their music.
+      </h3>
       <div className="search-controls">
-        <input id="artist_input" name="artist_input" type="text" onChange={ getUserInputtedArtist }/>
-        <button onClick={ clickButton }>Search</button>
+        <input
+          id="artist_input"
+          name="artist_input"
+          type="text"
+          onChange={getUserInputtedArtist}
+        />
+        <button onClick={clickButton}>Search</button>
       </div>
 
       <div>
-        <input id="user" name="user" type="text" onChange={ getUserName }/>
-        <button onClick={ clickLogin }>Login</button>
+        <input id="user" name="user" type="text" onChange={getUserName} />
+        <button onClick={clickLogin}>Login</button>
       </div>
 
-      <Login inputUser={ user }/>
+      <Login inputUser={user} onUserID={setUserID} />
 
       <div className="results-grid">
         <section className="results-column">
-          <SetlistApiComponent artistName={artist} onArtistSelect={setSelectedArtist} />
+          <SetlistApiComponent
+            artistName={artist}
+            onArtistSelect={setSelectedArtist}
+          />
         </section>
         <section className="results-column">
           <Events artistName={artist} />
@@ -65,8 +78,10 @@ function App() {
           <MusicPreviewWidget artistName={selectedArtist || artist} />
         </section>
       </div>
+      <SongSearch userId={userID} />
+
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -35,7 +35,7 @@ const findUser = async (name) => {
     return data?.id;
 }
 
-const Login = ({inputUser}) => {
+const Login = ({inputUser, onUserID}) => {
     const [allUsers, setAllUsers] = useState([]);
     const [userID, setUserID] = useState(null);
 
@@ -50,6 +50,7 @@ const Login = ({inputUser}) => {
             const userId = await findUser(inputUser);
             setUserID(userId);
             console.log("User ID: ", userId);
+            onUserID?.(userId);
         }
 
         fetchUsers();
