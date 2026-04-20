@@ -43,13 +43,13 @@ const Login = ({inputUser, onUserID}) => {
         const fetchUsers = async () => {
             const users = await getUsers(inputUser);
             setAllUsers(users);
-            console.log("All users: ", users);
+            // console.log("All users: ", users);
         };
 
         const getUserID = async () => {
             const userId = await findUser(inputUser);
             setUserID(userId);
-            console.log("User ID: ", userId);
+            // console.log("User ID: ", userId);
             onUserID?.(userId);
         }
 
@@ -67,7 +67,7 @@ const Login = ({inputUser, onUserID}) => {
     return (
         <div>
             <p>NOTE: Everything the Login component displays is for testing purposes only.</p>
-            <p>Logged in as: {inputUser}</p>
+             <p>Logged in as: {inputUser}</p> {/*Keep this line though */}
 
               <ul>
                     {allUsers.map((user, index) => (

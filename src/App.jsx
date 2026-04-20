@@ -6,6 +6,7 @@ import Events from "./Events.jsx";
 import Navbar from "./Navbar.jsx";
 import Login from "./Users.jsx";
 import SongSearch from './SongSearch.jsx';
+import DisplayUserSongs from "./DisplayUserSongs.jsx";
 
 // Franz Ferdinand
 
@@ -42,21 +43,11 @@ function App() {
   return (
     <div className="app-shell">
       <Navbar />
-      <h1>Artist Search</h1>
-      <h3>
-        Enter an artist's name to see their events and setlists and listen to a
-        preview of their music.
-      </h3>
-      <div className="search-controls">
-        <input
-          id="artist_input"
-          name="artist_input"
-          type="text"
-          onChange={getUserInputtedArtist}
-        />
-        <button onClick={clickButton}>Search</button>
-      </div>
 
+      <h1>Artist Search</h1>
+      <SongSearch userId={userID} />
+
+      <h1>Login: </h1>
       <div>
         <input id="user" name="user" type="text" onChange={getUserName} />
         <button onClick={clickLogin}>Login</button>
@@ -64,21 +55,9 @@ function App() {
 
       <Login inputUser={user} onUserID={setUserID} />
 
-      <div className="results-grid">
-        <section className="results-column">
-          <SetlistApiComponent
-            artistName={artist}
-            onArtistSelect={setSelectedArtist}
-          />
-        </section>
-        <section className="results-column">
-          <Events artistName={artist} />
-        </section>
-        <section className="results-column">
-          <MusicPreviewWidget artistName={selectedArtist || artist} />
-        </section>
-      </div>
-      <SongSearch userId={userID} />
+
+      <h1>Display User Songs / Your Playlist: </h1>
+      <DisplayUserSongs userId={userID} />
 
     </div>
   );
