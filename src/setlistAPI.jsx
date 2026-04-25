@@ -17,8 +17,6 @@ const formatEventDate = (eventDate) => {
     return `${month}-${day}-${year}`;
 };
 
-const scrollableListStyleClass = "scrollable-list";
-
 const SetlistApiComponent = ({ artistName, onArtistSelect }) => {
     // This will hold the values for setlisst, which we will get from the API 
     const [artists, setArtists] = useState([]);
@@ -151,19 +149,19 @@ const SetlistApiComponent = ({ artistName, onArtistSelect }) => {
     
     // Only render the setlist data if we have an artist name, otherwise prompt the user to enter one
     if (!artistName) {
-        return <h2>Please enter an artist name to see the setlist data.</h2>;
+        return <h2 className="mb-2 text-[1.6em] leading-tight text-white">Please enter an artist name to see the setlist data.</h2>;
     }
 
     // Display the possible artists the user can pick 
     if (!artistMBID) {
         return (
             <div>
-                <div className="panel-heading">
-                    <h2 className="panel-title">Possible Setlists</h2>
+                <div className="mb-2">
+                    <h2 className="text-[1.6em] leading-tight text-white">Possible Setlists</h2>
                 </div>
-                <ul className={scrollableListStyleClass}>
+                <ul className="mt-0 max-h-[550px] space-y-2 overflow-y-auto">
                     {artists.map(artist => (
-                        <li key={artist.mbid || artist.name}>
+                        <li key={artist.mbid || artist.name} className="text-white">
                             <button
                                 onClick={() => {
                                     if (!artist.mbid) {
@@ -176,6 +174,7 @@ const SetlistApiComponent = ({ artistName, onArtistSelect }) => {
                                     if (onArtistSelect) onArtistSelect(artist.name || "");
                                 }}
                                 disabled={!artist.mbid}
+                                className="m-2 rounded-lg border border-white bg-[#262e61] px-4 py-2 text-[#D2D8FF] transition hover:border-[#D2D8FF] disabled:cursor-not-allowed disabled:opacity-50"
                             >
                                 {artist.name}
                             </button>
@@ -190,7 +189,7 @@ const SetlistApiComponent = ({ artistName, onArtistSelect }) => {
     if (!setlistDate) {
         return (
             <div>
-                <h2>Possible Setlists{selectedArtistLabel ? ` for ${selectedArtistLabel}` : ""}:</h2>
+                <h2 className="mb-2 text-[1.6em] leading-tight text-white">Possible Setlists{selectedArtistLabel ? ` for ${selectedArtistLabel}` : ""}:</h2>
                 <button
                     onClick={() => {
                         setArtistMBID("");
@@ -199,15 +198,16 @@ const SetlistApiComponent = ({ artistName, onArtistSelect }) => {
                         setSetlistDate("");
                         setSongs([]);
                     }}
+                    className="m-2 rounded-lg border border-white bg-[#262e61] px-4 py-2 text-[#D2D8FF] transition hover:border-[#D2D8FF]"
                 >
                     Back to Artists
                 </button>
 
                 {setlists.length > 0 ? (
-                    <ul className={scrollableListStyleClass}>
+                    <ul className="mt-0 max-h-[550px] space-y-2 overflow-y-auto">
                         {setlists.map(setlist => (
-                            <li key={setlist.id}>
-                                <button onClick={ () => setSetlistDate(setlist.eventDate) }><p>{formatEventDate(setlist.eventDate)}</p></button>
+                            <li key={setlist.id} className="text-white">
+                                <button onClick={ () => setSetlistDate(setlist.eventDate) } className="m-2 rounded-lg border border-white bg-[#262e61] px-4 py-2 text-[#D2D8FF] transition hover:border-[#D2D8FF]"><p>{formatEventDate(setlist.eventDate)}</p></button>
                             </li>
                         ))}
                     </ul>
@@ -221,12 +221,13 @@ const SetlistApiComponent = ({ artistName, onArtistSelect }) => {
     if (setlistDate) {
         return (
             <div>
-                <p>Setlist for {selectedArtistLabel || artistName} on {formatEventDate(setlistDate)}:</p>
+                <p className="text-white">Setlist for {selectedArtistLabel || artistName} on {formatEventDate(setlistDate)}:</p>
                 <button
                     onClick={() => {
                         setSetlistDate("");
                         setSongs([]);
                     }}
+                    className="m-2 rounded-lg border border-white bg-[#262e61] px-4 py-2 text-[#D2D8FF] transition hover:border-[#D2D8FF]"
                 >
                     Back to Dates
                 </button>
@@ -238,18 +239,19 @@ const SetlistApiComponent = ({ artistName, onArtistSelect }) => {
                         setSetlistDate("");
                         setSongs([]);
                     }}
+                    className="m-2 rounded-lg border border-white bg-[#262e61] px-4 py-2 text-[#D2D8FF] transition hover:border-[#D2D8FF]"
                 >
                     Back to Artists
                 </button>
 
                 {songs.length > 0 ? (
-                    <ul className={scrollableListStyleClass}>
+                    <ul className="mt-0 max-h-[550px] space-y-2 overflow-y-auto">
                         {songs.map((song, index) => (
-                            <li key={index}>{song}</li>
+                            <li key={index} className="text-white">{song}</li>
                         ))}
                     </ul>
                 ) : (
-                    <p>Setlist not available at this time.</p>
+                    <p className="text-white">Setlist not available at this time.</p>
                 )}
             </div>
         );

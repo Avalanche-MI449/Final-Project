@@ -38,7 +38,7 @@ const saveSong = async (trackId, songName, userId) => {
   }
 };
 
-const SongSearch = ({ userId }) => {
+const SongSearch = ({ userId, onSongSaved }) => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -68,55 +68,67 @@ const SongSearch = ({ userId }) => {
       await saveSong(song.trackId, song.trackName, userId);
       setSavedSongs((prev) => [...prev, song.trackId]);
       setMessage(`"${song.trackName}" saved to your playlist!`);
+      onSongSaved?.(song);
     } catch (err) {
       setMessage("Failed to save song. Please try again.");
     }
   };
 
   return (
-    <div>
-      <h2>Song Search</h2>
-      <div className="search-controls">
+    <div className="text-left">
+      <div className="flex flex-col gap-2 rounded-lg p-3 sm:flex-row sm:items-center ">
         <input
           type="text"
           placeholder="Search for a song..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+          className="w-full rounded-md border-2 border-[#cf68e8] bg-[#390e59] px-3 py-2 text-sm text-white placeholder-[#FFFFFF] outline-none focus:border-[#cfd6ff]"
         />
-        <button onClick={handleSearch} disabled={loading}>
+        <button
+          onClick={handleSearch}
+          disabled={loading}
+          className="rounded-md border border-[#cf68e8] bg-[#cf68e8] px-4 py-2 text-sm font-semibold text-white transition hover:border-[#d2d8ff] disabled:cursor-not-allowed disabled:opacity-60"
+        >
           {loading ? "Searching..." : "Search"}
         </button>
       </div>
 
       {message && (
-        <p style={{ color: message.includes("saved") ? "green" : "red" }}>
+        <p
+          className={`mt-3 text-sm font-medium ${
+            message.includes("saved") ? "text-green-400" : "text-red-400"
+          }`}
+        >
           {message}
         </p>
       )}
 
-      <ul style={{ listStyle: "none", padding: 0 }}>
+      <ul className="mt-4 space-y-2 p-0">
         {results.map((song) => (
           <li
             key={song.trackId}
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "8px 0",
-              borderBottom: "1px solid #eee",
-            }}
+            className="flex items-center justify-between rounded-lg border border-[#2e3877] bg-[#1a235c] px-3 py-2"
           >
-            <div>
-              <strong>{song.trackName}</strong> — {song.artistName}
-              <br />
-              <small>{song.collectionName}</small>
+            <div className="flex min-w-0 items-center gap-3">
+              <img
+                src={song.artworkUrl100}
+                alt={`${song.collectionName || song.trackName} album cover`}
+                className="h-14 w-14 rounded-md object-cover"
+              />
+              <div className="min-w-0">
+                <p className="truncate text-sm font-semibold text-white">
+                  {song.trackName} - {song.artistName}
+                </p>
+                <p className="truncate text-xs text-[#b8c1e0]">{song.collectionName}</p>
+              </div>
             </div>
             <button
               onClick={() => handleSave(song)}
               disabled={savedSongs.includes(song.trackId)}
+              className="shrink-0 rounded-md border border-[#d2d8ff] bg-[#262e61] px-3 py-2 text-xs font-semibold text-[#d2d8ff] transition hover:border-white disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {savedSongs.includes(song.trackName) ? "Saved" : "Save"}
+              {savedSongs.includes(song.trackId) ? "Saved" : "Save"}
             </button>
           </li>
         ))}

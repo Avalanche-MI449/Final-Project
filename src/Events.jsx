@@ -1,6 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
 import EventsWidget from './EventsWidget.jsx';
-import './App.css';
 
 function Events({ artistName }) {
   const [events, setEvents] = useState([]);

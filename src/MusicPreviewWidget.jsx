@@ -34,16 +34,16 @@ export default function MusicPreviewWidget({ artistName }) {
   }, [artistName]);
 
   return (
-    <div className="music-widget">
-      <h2>Music Preview</h2>
+    <div className="mx-auto w-full max-w-[300px] rounded-[10px] border border-[#ddd] p-5">
+      <h2 className="mb-2 text-[1.6em] leading-tight text-white">Music Preview</h2>
 
-      {loading && <p>Loading...</p>}
+      {loading && <p className="text-white">Loading...</p>}
 
       {track && (
-        <div className="song-preview">
-          <img src={track.artworkUrl100} alt="album cover" />
-          <h4>{track.trackName}</h4>
-          <p>{track.artistName}</p>
+        <div>
+          <img src={track.artworkUrl100} alt="album cover" className="mx-auto w-[100px] rounded-lg" />
+          <h4 className="mt-2 text-white">{track.trackName}</h4>
+          <p className="text-white">{track.artistName}</p>
 
           <audio controls src={track.previewUrl}>
             Your browser does not support audio.

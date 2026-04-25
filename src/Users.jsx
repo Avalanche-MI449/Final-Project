@@ -1,4 +1,4 @@
-import React, {useState, useEffect, use} from 'react';
+import React, {useState, useEffect} from 'react';
 import { createClient } from '@supabase/supabase-js';
 
 // Connect to Supabase
@@ -13,7 +13,7 @@ const getUsers = async (name) => {
         .from('users')
         .select('*')
 
-    return users;
+    return users || [];
 }
 
 const addUser = async (name) => {
@@ -65,16 +65,15 @@ const Login = ({inputUser, onUserID}) => {
 
 
     return (
-        <div>
-            <p>NOTE: Everything the Login component displays is for testing purposes only.</p>
-             <p>Logged in as: {inputUser}</p> {/*Keep this line though */}
+        <div className="text-left">
+            <p className="mb-2 text-xs text-[#c6cffc]">Logged in as: {inputUser || 'Guest'}</p>
 
-              <ul>
-                    {allUsers.map((user, index) => (
-                    <li key={index}>{user.name}</li>
-                    ))}
-                </ul>
-                
+            <p className="mb-1 text-[11px] uppercase tracking-wide text-[#9aa7ff]">Users</p>
+            <ul className="max-h-28 overflow-y-auto pr-1 text-xs text-[#e8ecff]">
+                {allUsers.map((user, index) => (
+                    <li key={index} className="rounded px-2 py-1 hover:bg-[#1b2766]">{user.name}</li>
+                ))}
+            </ul>
         </div>
     )
 };
