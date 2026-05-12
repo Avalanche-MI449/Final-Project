@@ -3,8 +3,8 @@ import { createClient } from '@supabase/supabase-js';
 
 // Connect to Supabase
 const supabaseUrl = 'https://djsrjatigmxnoaxydepq.supabase.co';
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
-// const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqc3JqYXRpZ214bm9heHlkZXBxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0OTYxNTcsImV4cCI6MjA5MTA3MjE1N30.vnj5TDsBS9edeBkqx2XHIxRjCbCNd1BePG1gjhqRDnI';
+// const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqc3JqYXRpZ214bm9heHlkZXBxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU0OTYxNTcsImV4cCI6MjA5MTA3MjE1N30.vnj5TDsBS9edeBkqx2XHIxRjCbCNd1BePG1gjhqRDnI';
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Get a list of all the users in the database

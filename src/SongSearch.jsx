@@ -97,7 +97,7 @@ const SongSearch = ({ userId, onSongSaved }) => {
       {message && (
         <p
           className={`mt-3 text-sm font-medium ${
-            message.includes("saved") ? "text-green-400" : "text-red-400"
+            message.includes("saved") ? "text-[#C1B5FD]" : "text-[#FF9AA2]"
           }`}
         >
           {message}
@@ -108,7 +108,7 @@ const SongSearch = ({ userId, onSongSaved }) => {
         {results.map((song) => (
           <li
             key={song.trackId}
-            className="flex items-center justify-between rounded-lg border border-[#2e3877] bg-[#1a235c] px-3 py-2"
+            className="flex items-center justify-between rounded-lg border border-[#7148B5] bg-[#2d1b47] px-3 py-2"
           >
             <div className="flex min-w-0 items-center gap-3">
               <img
@@ -117,16 +117,16 @@ const SongSearch = ({ userId, onSongSaved }) => {
                 className="h-14 w-14 rounded-md object-cover"
               />
               <div className="min-w-0">
-                <p className="truncate text-sm font-semibold text-white">
+                <p className="truncate text-sm font-semibold text-[#FFFFFF]">
                   {song.trackName} - {song.artistName}
                 </p>
-                <p className="truncate text-xs text-[#b8c1e0]">{song.collectionName}</p>
+                <p className="truncate text-xs text-[#C1B5FD]">{song.collectionName}</p>
               </div>
             </div>
             <button
               onClick={() => handleSave(song)}
               disabled={savedSongs.includes(song.trackId)}
-              className="shrink-0 rounded-md border border-[#d2d8ff] bg-[#262e61] px-3 py-2 text-xs font-semibold text-[#d2d8ff] transition hover:border-white disabled:cursor-not-allowed disabled:opacity-50"
+              className="shrink-0 rounded-md border border-[#CF68E8] bg-[#CF68E8] px-3 py-2 text-xs font-semibold text-white transition hover:border-white disabled:cursor-not-allowed disabled:opacity-50"
             >
               {savedSongs.includes(song.trackId) ? "Saved" : "Save"}
             </button>

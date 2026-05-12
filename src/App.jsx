@@ -50,7 +50,7 @@ function App() {
 
 
       <div className="relative min-h-[calc(100vh-4rem)] w-full">
-        <div className="pointer-events-none absolute w-[1800px] h-full z-0">
+        <div className="pointer-events-none absolute w-full h-full z-0">
           <LineWaves
             speed={0.1}
             innerLineCount={32}
