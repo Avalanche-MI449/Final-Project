@@ -37,7 +37,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen w-full overflow-x-hidden bg-[#141B48]">
+    <div className="min-h-screen w-full overflow-x-hidden bg-[#2e0b47]">
       <div className="mx-auto max-w-[1400px] px-6 bg-[#FFFFFF]">
         <Navbar
           inputUser={inputUser}
@@ -53,15 +53,15 @@ function App() {
         <div className="pointer-events-none absolute w-full h-full z-0">
           <LineWaves
             speed={0.1}
-            innerLineCount={32}
-            outerLineCount={36}
-            warpIntensity={1}
-            rotation={-45}
-            edgeFadeWidth={0}
-            colorCycleSpeed={1}
-            brightness={0.2}
-            color1="#390E59"
-            color2="#7148B5"
+            innerLineCount={15}
+            outerLineCount={15}
+            warpIntensity={0.25}
+            rotation={-60}
+            edgeFadeWidth={1}
+            colorCycleSpeed={0.2}
+            brightness={0.1}
+            color1="#7148B5"
+            color2="#cf68e8"
             color3="#C1B5FD"
             enableMouseInteraction
             mouseInfluence={2}
